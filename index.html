@@ -86,10 +86,10 @@ const stringToColor = (string) => COLORS[hashString(string) % COLORS.length];
     ]
 
     // List of subgroups = header of the csv files = soil condition here
-    var subgroups = ['group', 'Nitrogen', 'normal', 'stress'].slice(1)
+    var subgroups = catogeories
 
     // List of groups = species here = value of the first column called group -> I show them on the X axis
-    var groups = d3.map(data, function (d) { return (d.group) }).keys()
+    var groups = d3.map(data, function (d) { return (d.email) }).keys()
 
     // Add X axis
     var x = d3.scaleBand()
@@ -134,7 +134,7 @@ const stringToColor = (string) => COLORS[hashString(string) % COLORS.length];
     var group = svg.append("g")
         .selectAll("g")
         // Enter in data = loop group per group
-        .data(data)
+        .data(record.statsLeftVideoForAllUsers)
         .enter()
         .append("g")
         .attr("transform", function (d) { return "translate(" + x(d.group) + ",0)"; })
