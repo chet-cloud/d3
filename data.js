@@ -1,4 +1,4 @@
-const record = {
+const  record = {
     "statsLeftVideoForAllUsers": [
         {
             "email": "mhassler@artisreit.com",
@@ -12900,4 +12900,22 @@ const record = {
     ]
 }
 
+
+const getCatogeories = (d)=>{
+    result = {}
+    d.map((v)=>{
+        Object.keys(v).forEach(k=>{
+            result[k] = k
+        })
+    })
+    return result
+}
+
+const catogeories = Object.keys({
+    ...getCatogeories(record.statsLeftVideoForAllUsers),
+    ...getCatogeories(record.statsHistoryVideoForAllUsers),
+    ...getCatogeories(record.statsLikedVideoForAllUsers)
+}).filter(v=>{
+    return !(v==='email' || v==='count' || v==='videoIds' || v==='null')
+})
 
