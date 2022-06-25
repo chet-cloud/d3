@@ -12911,6 +12911,8 @@ const getCatogeories = (d)=>{
     return result
 }
 
+
+
 const catogeories = Object.keys({
     ...getCatogeories(record.statsLeftVideoForAllUsers),
     ...getCatogeories(record.statsHistoryVideoForAllUsers),
@@ -12918,4 +12920,23 @@ const catogeories = Object.keys({
 }).filter(v=>{
     return !(v==='email' || v==='count' || v==='videoIds' || v==='null')
 })
+
+const temp = {}
+catogeories.forEach(v=>{
+    temp[v] = 0
+})
+
+const setZeroForNotShowCatogeories = (v)=>{
+    return {...temp,...v}
+}
+
+const setCountInEmail = (v)=>{
+    v['email'] = `${v.count} - ${v.email}`
+    return v
+}
+
+
+record.statsLeftVideoForAllUsers = record.statsLeftVideoForAllUsers.map(setZeroForNotShowCatogeories).map(setCountInEmail)
+record.statsHistoryVideoForAllUsers = record.statsHistoryVideoForAllUsers.map(setZeroForNotShowCatogeories).map(setCountInEmail)
+record.statsLikedVideoForAllUsers = record.statsLikedVideoForAllUsers.map(setZeroForNotShowCatogeories).map(setCountInEmail)
 
